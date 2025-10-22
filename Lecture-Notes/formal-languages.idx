@@ -25,8 +25,8 @@
 \indexentry{$\doteq$|hyperpage}{16}
 \indexentry{equivalence of regular expressions|hyperpage}{16}
 \indexentry{$\texttt{Ply}$|hyperpage}{19}
-\indexentry{scanner|hyperpage}{19}
-\indexentry{token|hyperpage}{19}
+\indexentry{scanner|hyperpage}{20}
+\indexentry{token|hyperpage}{20}
 \indexentry{ply|hyperpage}{21}
 \indexentry{\texttt{Ply}|hyperpage}{21}
 \indexentry{immediate token definition|hyperpage}{21}
@@ -54,10 +54,9 @@
 \indexentry{$L(F)$|hyperpage}{39}
 \indexentry{$\varepsilon$-closure|hyperpage}{39}
 \indexentry{$\textsl{det}(F)$|hyperpage}{41}
-\indexentry{reachable|hyperpage}{52}
-\indexentry{separable|hyperpage}{52}
+\indexentry{reachable|hyperpage}{53}
+\indexentry{separable|hyperpage}{53}
 \indexentry{separates|hyperpage}{53}
-\indexentry{identification of states|hyperpage}{53}
 \indexentry{regular language|hyperpage}{57}
 \indexentry{complement of a language|hyperpage}{58}
 \indexentry{complement of a language|hyperpage}{60}
@@ -65,21 +64,21 @@
 \indexentry{reversal of a string|hyperpage}{61}
 \indexentry{pumping lemma for regular languages|hyperpage}{62}
 \indexentry{Pumping Lemma for regular languages|hyperpage}{62}
-\indexentry{syntactic   variable|hyperpage}{70}
-\indexentry{non-terminal|hyperpage}{70}
-\indexentry{terminal|hyperpage}{70}
-\indexentry{syntactic category|hyperpage}{70}
-\indexentry{context-free grammar|hyperpage}{71}
-\indexentry{syntactic variables|hyperpage}{71}
-\indexentry{non-terminals|hyperpage}{71}
-\indexentry{terminals|hyperpage}{71}
-\indexentry{tokens|hyperpage}{71}
-\indexentry{grammar rule|hyperpage}{71}
-\indexentry{start symbol|hyperpage}{72}
-\indexentry{derivation-step|hyperpage}{73}
-\indexentry{palindrome|hyperpage}{75}
+\indexentry{syntactic   variable|hyperpage}{71}
+\indexentry{non-terminal|hyperpage}{71}
+\indexentry{terminal|hyperpage}{71}
+\indexentry{syntactic category|hyperpage}{71}
+\indexentry{context-free grammar|hyperpage}{72}
+\indexentry{syntactic variables|hyperpage}{72}
+\indexentry{non-terminals|hyperpage}{72}
+\indexentry{terminals|hyperpage}{72}
+\indexentry{tokens|hyperpage}{72}
+\indexentry{grammar rule|hyperpage}{72}
+\indexentry{start symbol|hyperpage}{73}
+\indexentry{derivation-step|hyperpage}{74}
+\indexentry{palindrome|hyperpage}{76}
 \indexentry{parse-tree|hyperpage}{76}
-\indexentry{ambiguous grammar|hyperpage}{78}
+\indexentry{ambiguous grammar|hyperpage}{79}
 \indexentry{left-recursive|hyperpage}{79}
 \indexentry{\textsc{Ebnf}-Grammar|hyperpage}{85}
 \indexentry{Cocke-Younger-Kasami-Algorithmus|hyperpage}{116}

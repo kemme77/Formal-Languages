@@ -1072,20 +1072,20 @@ implements the theory discussed in this section.
 
 
 
-\section{Translating a Deterministic \textsc{FSM} into a Regular Expression}
-In this last section we start with a deterministic \textsc{FSM} $F$ and construct a regular expression $r$
+\section{Translating a \textsc{DFA} into a Regular Expression}
+In this last section we start with a \textsc{DFA} $F$ and construct a regular expression $r$
 such that we have
 \\[0.2cm]
 \hspace*{1.3cm}
 $L(r) = L(F)$. 
 \\[0.2cm]
-We assume that the \textsc{FSM} $F$ is given as follows:
+We assume that the \textsc{DFA} $F$ is given as follows:
 \\[0.2cm]
 \hspace*{1.3cm}
 $F = \bigl\langle \{ q_0, q_1, \cdots, q_n \}, \Sigma, \delta, q_0, A \bigr\rangle$.
 \\[0.2cm]
 For every pair of states $\pair(p_1,p_2) \in Q \times Q$ we define a regular expression
-$r(p_1, p_2)$ such that $r(p_1, p_2)$ describes those strings $w$ that take the \textsc{FSM} $F$ from the state
+$r(p_1, p_2)$ such that $r(p_1, p_2)$ describes those strings $w$ that take the \textsc{DFA} $F$ from the state
 $p_1$ to the state $p_2$, i.e.~we have
 \\[0.2cm]
 \hspace*{1.3cm}
@@ -1094,7 +1094,7 @@ $L\bigl(r(p_1, p_2)\bigr) =
 \\[0.2cm]  
 The definition of $r(p_1, p_2)$ is done by first defining auxiliary regular expressions 
 $r^{(k)}(p_1, p_2)$ for all $k =0,\cdots,n+1$.   The regular expression $r^{(k)}(p_1, p_2)$ specifies those
-strings that take the \textsc{FSM} $F$ from the state
+strings that take the \textsc{DFA} $F$ from the state
 $p_1$ to the state $p_2$ without visiting a state from the set
 \\[0.2cm]
 \hspace*{1.3cm}
@@ -1110,7 +1110,7 @@ Given two states $p, q \in Q$ and a string $w$ we have that
 \hspace*{1.3cm}
 $p \stackrel{w}{\mapsto}_k q$
 \\[0.2cm]
-holds iff the \textsc{FSM} $F$ switches from the state $p$ to the state $q$ when it reads the string $w$
+holds iff the \textsc{DFA} $F$ switches from the state $p$ to the state $q$ when it reads the string $w$
 but on reading $w$ does not switch to a state from the set
 $Q_k$ \blue{in-between}.  Here, ``in-between'' specifies that the states $p$ and $q$ may well be elements of the set
 $Q_k$, only the states between $p$ and $q$ must not be in $Q_k$.
@@ -1123,7 +1123,7 @@ The formal definition of $p \stackrel{w}{\mapsto}_k q$ is done by induction on  
         because when the empty string is read we can only reach the state $p$ if we start in the state $p$.
   \item $\delta(p, c) = q \;\Rightarrow\; p \stackrel{c}{\mapsto}_k q$,
 
-        because when the \textsc{FSM} reads the character $c$ and switches from state $p$ directly
+        because when the \textsc{DFA} reads the character $c$ and switches from state $p$ directly
         to the state $q$, there are no states ``inbetween''.
   \end{enumerate}
 \item[I.S.:] $w = cv$ where $|v| \geq 1$.
@@ -1144,7 +1144,7 @@ The definition of the regular expressions $r^{(k)}(p_1, p_2)$ is done by inducti
 \item[B.C.:] $k = 0$.  
 
   Then we have $Q_0 = Q$ and therefore the set $Q_0$ contains all states.
-  Therefore, when the \textsc{FSM} switches from the state $p_1$ to the state $p_2$ it must not visit any
+  Therefore, when the \textsc{DFA} switches from the state $p_1$ to the state $p_2$ it must not visit any
   states in-between.  There are two cases.
   \begin{enumerate}
   \item $p_1 \not= p_2$:  Then we can have  $p_1 \stackrel{w}{\mapsto}_0 p_2$ only if $w$ contains but a
@@ -1153,7 +1153,7 @@ The definition of the regular expressions $r^{(k)}(p_1, p_2)$ is done by inducti
         \hspace*{1.3cm}
         $\{ c_1, \cdots, c_l \} := \{ c \in \Sigma \mid \delta(p_1,c) = p_2 \}$
         \\[0.2cm]
-        as the set of all letters that take the \textsc{FSM} from the state $p_1$ to the state $p_2$.
+        as the set of all letters that take the \textsc{DFA} from the state $p_1$ to the state $p_2$.
         If this set is not empty we define 
         \\[0.2cm]
         \hspace*{1.3cm}
@@ -1183,7 +1183,7 @@ The definition of the regular expressions $r^{(k)}(p_1, p_2)$ is done by inducti
   When compared to the regular expression $r^{(k)}(p_1, p_2)$,
   the regular expression  $r^{(k+1)}(p_1, p_2)$ is allowed to use the state
   $q_k$, because $q_k$ is the only element of the set $Q_k$ that is not a member of the set $Q_{k+1}$.  
-  If the \textsc{FSM} reads a string $w$ that switches the state $p_1$ to the state $p_2$ without switching into a state
+  If the \textsc{DFA} reads a string $w$ that switches the state $p_1$ to the state $p_2$ without switching into a state
   from the set $Q_{k+1}$, then there are two cases.
   \begin{enumerate}
   \item We already have $p_1 \stackrel{w}{\mapsto}_k p_2$.
@@ -1206,7 +1206,7 @@ Now we are ready to define the regular expressions $r(p_1,p_2)$ for all states $
 \hspace*{1.3cm}
 $r(p_1,p_2) := r^{(n+1)}(p_1,p_2)$. 
 \\[0.2cm]
-This regular expression specifies all strings that take the \textsc{FSM} from the state
+This regular expression specifies all strings that take the \textsc{DFA} from the state
 $p_1$ to the state $p_2$ without using any state from the set 
 $Q_{n+1}$ in-between.   Since we have
 \\[0.2cm]
@@ -1218,7 +1218,7 @@ Therefore the regular expression $r^{(n+1)}(p_1,p_2)$
 does not exclude any states when switching from
 state $p_1$ to the state $p_2$.
 
-In order to construct a regular expression that specifies the language accepted by a deterministic \textsc{FSM}
+In order to construct a regular expression that specifies the language accepted by a deterministic \textsc{DFA}
 $F$ we write the set $A$ of accepting states of $F$ as
 \\[0.2cm]
 \hspace*{1.3cm}
@@ -1229,17 +1229,17 @@ Then the regular expression $r(A)$ is defined as
 \hspace*{1.3cm}
 $r(A) := r(q_0, t_1) + \cdots + r(q_0, t_m)$.
 \\[0.2cm]
-This regular expression specifies those strings that take the \textsc{FSM} $F$ from its start state $q_0$ into
+This regular expression specifies those strings that take the \textsc{DFA} $F$ from its start state $q_0$ into
 any of its accepting states.
 \qed
 
 
 \exerciseEng
-Take the \textsc{FSM} shown in Figure \ref{fig:abstara.dot} and construct an equivalent regular expression.
+Take the \textsc{DFA} shown in Figure \ref{fig:abstara.dot} and construct an equivalent regular expression.
 
 
 \solutionEng
-The \textsc{FSM} has two states: $0$ and $1$.  We start by computing the regular expressions
+The \textsc{DFA} has two states: $0$ and $1$.  We start by computing the regular expressions
 $r^{(k)}(i,j)$ for all $i,j\in\{0,1\}$ for  $k =0$, $1$, and $2$:
 \begin{enumerate}
 \item For $k = 0$ we have:
@@ -1329,9 +1329,9 @@ $r(F) = r^{(2)}(0, 1) \doteq \texttt{a}^* \cdot \texttt{b} \cdot \texttt{a}^*$.
 
 
 \exerciseEng
-Take the \textsc{FSM} shown in Figure \ref{fig:exercise-13.eps} on page
+Take the \textsc{DFA} shown in Figure \ref{fig:exercise-13.eps} on page
 \pageref{fig:exercise-13.eps} and construct a regular expression specifying the same language as this
-\textsc{FSM}.
+\textsc{DFA}.
 \vspace*{0.1cm}
 
 \noindent
@@ -1352,36 +1352,59 @@ The \textsl{Jupyter notebook}
 \hspace*{-0.3cm}
 \href{https://github.com/karlstroetmann/Formal-Languages/blob/master/Python/Chapter-04-05/05-DFA-2-RegExp.ipynb}{https://github.com/karlstroetmann/Formal-Languages/../Python/Chapter-04-05/05-DFA-2-RegExp.ipynb}
 \\[0.2cm]
-contains a program that takes a deterministic \textsc{FSM} $F$ and computes a regular expression $r$ such that
+contains a program that takes a  \textsc{DFA} $F$ and computes a regular expression $r$ such that
 $r$ specifies the language accepted by $F$, i.e.~we have $L(r) = L(F)$.
 
 \section{Minimization of Finite State Automatons}
-In this section we show how to minimize the number of states of a deterministic finite state automaton
+In this section we show how to minimize the number of states of a \textsc{DFA}
 \\[0.2cm]
 \hspace*{1.3cm}
 $F = \langle Q, \Sigma, \delta, q_0, A \rangle$.
 \\[0.2cm]
-Without loss of generality we want to assume that the \textsc{FSM} $F$ is complete: Therefore, we assume that
+Without loss of generality we want to assume that the \textsc{DFA} $F$ is complete: Therefore, we assume that
 for each state $q \in Q$ and each letter $c \in \Sigma$ the expression $\delta(q, c)$ 
-returns a state of $Q$.  Our goal is to find a deterministic finite state automaton
+returns a state of $Q$.  Our goal is to find a \textsc{DFA}
 \\[0.2cm]
 \hspace*{1.3cm}
-$F^- = \langle Q^-, \Sigma, \delta^-, q_0, A^- \rangle$,
+$\mathtt{Min}(F) := \bigl\langle \mathcal{Q}_\sim, \Sigma, \Delta, [q_0]_\sim, \widehat{A} \bigr\rangle$
 \\[0.2cm]
 which accepts the same language as  $F$, so we have 
 \\[0.2cm]
 \hspace*{1.3cm}
-$L(F^-) = L(F)$
+$L\bigl(\mathtt{Min}(F)\bigr) = L(F)$
 \\[0.2cm]
-and for which the number of states of the set $Q^-$ is minimal.  
+and for which the number of states of the set $\mathcal{Q}_\sim$ is minimal.  You might be wondering about the
+meaning associated with $\mathcal{Q}_\sim$ and $[q_o]_\sim$:  We will introduce an equivalence relation
+$\sim$ on the set of states $Q$.  Basically, $p_1, p_2\in Q$ are \blue{equivalent} if they serve the same
+purpose in the \textsc{DFA} $F$, whatever that means.  If $p_1$ and $p_2$ are equivalent, this will be written as
+\\[0.2cm]
+\hspace*{1.3cm}
+$p_1 \sim p_2$.
+\\[0.2cm]
+Given a state $p \in Q$, the \blue{equivalence class} of $p$ w.r.t.~the relation $\sim$, written $[p]_\sim$ is the set of all states that
+are equivalent to $p$, i.e.~we have
+\\[0.2cm]
+\hspace*{1.3cm}
+$[p]_\sim := \{ q \in Q \mid p \sim q \}$.
+\\[0.2cm]
+The new states of the \textsc{DFA} $\texttt{Min}(F)$ will be equivalence classes of the equivalence relation
+$\sim$.  Therefore we have
+\\[0.2cm]
+\hspace*{1.3cm}
+$Q_\sim := \bigl\{ [q]_\sim \;\big|\; q \in Q \bigl\}$.
+\\[0.2cm]
+The new start state $[q_0]_\sim$ is the set of all states that are equivalent to the state $q_0$.  The formal definitions of the
+equivalence relation $\sim$, the function $\Delta: \mathcal{Q}_\sim \times \Sigma \rightarrow \mathcal{Q}_\sim$
+and the set $\widehat{A}$ will be given later.
+
 We start with the function 
 \\[0.2cm]
 \hspace*{1.3cm}
 $\delta^*: Q \times \Sigma^* \rightarrow Q$
 \\[0.2cm]
 which extends the function $\delta$ by accepting a string instead of a single character as its first argument.
-The function call $\delta^*(q,s)$ calculates the state $p$ which the \textsc{FSM} $F$ enters if it reads the
-string $s$ in the state $q$. As we have assumed the \textsl{Fsm} F to be complete, we have that
+The function call $\delta^*(q,s)$ calculates the state $p$ which the \textsc{DFA} $F$ enters if it reads the
+string $s$ in the state $q$. As we have assumed the \textsl{DFA} F to be complete, we have that
 \\[0.2cm]
 \hspace*{1.3cm}
 $\delta(q, c) \not\in \Omega$ \quad for all $q \in Q$ and all $c \in \Sigma$ 
@@ -1400,7 +1423,8 @@ a string $w \in \Sigma^*$ is given, such that
 \hspace*{1.3cm}
 $\delta^*(q_0, w) = p$
 \\[0.2cm]
-holds.  In the following we assume that all states of the \textsc{FSM} $F$ are reachable. 
+holds.  It is clear that an unreachable state is usesless.  Therefore, w.l.o.g.~we assume in the following that all
+states of the \textsc{DFA} $F =\langle Q, \Sigma, \delta, q_0, A \rangle$ are reachable.  
 
 
 \begin{figure}[!ht]
@@ -1410,15 +1434,15 @@ holds.  In the following we assume that all states of the \textsc{FSM} $F$ are r
   \label{fig:nicht-gleichwertig.dot}
 \end{figure}
 
-In general, we can minimize an \textsc{FSM} by identifying certain states.   
-If we look for example at the \textsc{FSM} shown in figure \ref{fig:nicht-gleichwertig.dot}, we can identify
-the states $q_1$ and $q_2$ as well as $q_3$ and $q_4$ without changing the language of the \textsc{FSM}. 
-The central idea in minimizing a \textsc{FSM} is that we compute those states which \textbf{must not} be
+In general, we can minimize a \textsc{DFA} by identifying certain states.   
+If we look for example at the \textsc{DFA} shown in figure \ref{fig:nicht-gleichwertig.dot}, we can identify
+the states $q_1$ and $q_2$ as well as $q_3$ and $q_4$ without changing the language of the \textsc{DFA}. 
+The central idea in minimizing a \textsc{DFA} is that we compute those states which \textbf{must not} be
 identified and consider all other states as equivalent.  States that must not be identified are called
 \blue{separable states}.  This notion is defined next.
 
 \begin{Definition}[Separable States]
-Assume $F = \langle Q, \Sigma, \delta, q_0, A \rangle$ is a deterministic finite state automaton.
+Assume $F = \langle Q, \Sigma, \delta, q_0, A \rangle$ is a \textsc{DFA}.
 Two states $p_1,p_2 \in Q$ are called \blue{separable} \index{separable} if and only if there exists a string 
 $s \in \Sigma^*$ such that either
 \begin{enumerate}
@@ -1427,20 +1451,16 @@ $s \in \Sigma^*$ such that either
 \end{enumerate}
 holds.  In this case, the string $s$ \blue{separates} \index{separates} the states $p_1$ and $p_2$. \qed
 \end{Definition}
-If two states $p_1$ and $p_2$ are separable, then it is obvious that theses states must not be identified.
-We define an equivalence relation $\sim$ on the set $Q$ of all states by setting
+If two states $p_1$ and $p_2$ are separable, then these states must not be identified since doing
+so would change the language that is accepted.  We define an equivalence relation $\sim$ on the set $Q$ of all
+states by setting 
 \\[0.2cm]
 \hspace*{1.3cm}
 $p_1 \sim p_2$ \quad iff \quad 
 $\forall s \in \Sigma^*:\bigl(\delta(p_1,s) \in A \leftrightarrow \delta(p_2,s) \in A\bigr)$.
 \\[0.2cm]
 Hence, two states $p_1$ and $p_2$ are considered to be equivalent iff they are not separable.   
-The claim is that we can identify all pairs $\langle p_1, p_2\rangle$ of equivalent states.  The
-\blue{identification} \index{identification of states} 
-of two states $p_1$ and $p_2$ is done by removing the state $p_2$ from the set $Q$ and changing the transition
-function $\delta$ in a way that the new version of $\delta$ will return $p_1$ in all those cases where the old
-version of $\delta$ had returned $p_2$. 
-
+The claim is that we can identify all pairs $\langle p_1, p_2\rangle$ of equivalent states.  
 
 The question remains how we can determine which states are separable.
 One possibility is to create a set $V$ with pairs of states.  We add the pair $\langle p, q \rangle$ to the set
@@ -1450,40 +1470,71 @@ there is a letter $c\in\Sigma$ and two states $s$ and $t$ that are already known
 \hspace*{1.3cm}
 $\delta(p,c) = s$, \quad $\delta(q,c) = t$, \quad and \quad $\langle s, t \rangle \in V$
 \\[0.2cm]
-holds. This idea leads to an algorithm that uses two steps:
-\begin{enumerate}[(a)]
-\item First we initialize $V$ with all the pairs $\pair(p,q)$, for which either $p$ is an accepting state and
-      $q$ is not an accepting state, or $q$ is an accepting state and $p$ is not an accepting state,
-      because an accepting state can be distinguished from a non-accepting state by the empty string
-      $\lambda$: 
-      \\[0.2cm]
-      \hspace*{1.3cm}
-      $V := \bigl\{\pair(p,q) \in Q \times Q \mid (p \in A \wedge q \notin A) \vee 
-      (p \notin A \wedge q \in A) \bigr\}$
-      \\[0.2cm]
-      This can also be written as the union of two Cartesian products. We have
-      \\[0.2cm]
-      \hspace*{1.3cm}
-      $V = A \times (Q \backslash A) \cup (Q \backslash A) \times A$.
-\item As long as we find a new pair $\pair(p,q) \in Q \times Q$ for which there is a letter $c$ such that the
-      states $\delta(p,c)$ and $\delta(q,c)$ are already separable, we add this pair to the set $V$:  
-      \\[0.2cm]
-      \hspace*{1.3cm} 
-      \texttt{while $\exists \pair(p,q) \in Q \times Q: \exists c \in \Sigma:\langle\delta(p,c),
-        \delta(q,c)\rangle \in V \wedge \pair(p,q) \notin V$ } \\
-      \hspace*{1.8cm}
-      \texttt{choose $\pair(p,q) \in Q \times Q$ such that} $\langle\delta(p,c),
-      \delta(q,c)\rangle \in V \wedge \pair(p,q) \notin V$ \\
-      \hspace*{2.3cm}
-      \texttt{$V$ := $V \cup \{\, \pair(p,q),\, \pair(q,p)\, \}$;} \\
+holds.  Formally, we define a sequence $(V_k)_{k\in\mathbb{N}}$ of sets of pairs of separable states by
+induction.
+\begin{enumerate}
+\item[I.A.:] $k=0$
+
+     Since an accepting state can never be equivalent to a non-accepting state we define
+     \\[0.2cm]
+     \hspace*{1.3cm}
+     $V_0 := \bigl(A \times (Q \backslash A)\bigr) \cup \bigl((Q \backslash A) \times A\bigr)$.
+     \\[0.2cm]
+     Therefore, initially only the accepting states are separable from the states that are not accepting.
+\item[I.S.:] $k \mapsto k + 1$
+
+     If we have a pair $\pair(p,q) \in Q \times Q$ and a letter $c$ such that 
+     the pair of states  $\langle \delta(p,c), \delta(q,c) \rangle$ is already separable, then $\langle p, q \rangle$ is
+     separable, too.  Therefore we define:  
+     \\[0.2cm]
+     \hspace*{1.3cm}
+     $V_{k+1} := V_k \cup \bigl\{ \pair(p,q) \bigm| \exists c \in \Sigma: \langle \delta(p,c), \delta(q,c) \rangle \in V_k \rangle\bigr\}$
 \end{enumerate}
-If we have found all pairs $\pair(p,q)$ of separable states, then we can identify all states $p$ and $q$
-which are not separable and therefore $\langle p, q \rangle \not\in V$.   The \textsc{FSM} constructed in
-this way is, in fact, minimal.  
+The sequence $(V_k)_{k\in\mathbb{N}}$ is monotonically increasing, i.e.~we have
+\\[0.2cm]
+\hspace*{1.3cm}
+$V_{k} \subseteq V_{k+1}$.
+\\[0.2cm]
+Since $V_k \subseteq Q \times Q$ and the set $Q \times Q$ is finite, there must be a $K \in \mathbb{N}$ such that
+\\[0.2cm]
+\hspace*{1.3cm}
+$V_{K+1} = V_K$.
+\\[0.2cm]
+We can therefore define two states $p$ and $q$ to be equivalent iff $\pair(p,q) \not\in V_K$:
+\\[0.2cm]
+\hspace*{1.3cm}
+$p \sim q \; \stackrel{\mathrm{def}}{\Longleftrightarrow} \; \pair(p,q) \not\in V_K$.
+\\[0.2cm]
+Next, for a state $p \in Q$ we define the \blue{equivalence class} of $p$ as the set
+\\[0.2cm]
+\hspace*{1.3cm}
+$[p]_\sim := \{ q \in Q \mid p \sim q \}$.
+\\[0.2cm]
+We define the set $\mathcal{Q}_\sim$ of all equivalence classes as
+\\[0.2cm]
+\hspace*{1.3cm}
+$\mathcal{Q}_\sim := \bigl\{ [q]_\sim \bigm| q \in Q \bigr\}$.
+\\[0.2cm]
+Next, we define the function $\Delta: \mathcal{Q}_\sim \times \Sigma \rightarrow \mathcal{Q}_\sim$ as follows:
+\\[0.2cm]
+\hspace*{1.3cm}
+$\Delta\bigl([q]_\sim, c\bigr) := \bigl[ \delta(q, c) \bigr]_\sim$.
+\\[0.2cm]
+Finally, we define the set of accepting equivalence classes $\widehat{A}$ as
+\\[0.2cm]
+\hspace*{1.3cm}
+$\widehat{A} := \bigl\{ [q]_\sim \bigm| q \in A \bigr\}$.
+\\[0.2cm]
+Then, the \textsc{DFA}
+\\[0.2cm]
+\hspace*{1.3cm}
+$\mathtt{Min}(F) := \bigl\langle \mathcal{Q}_\sim, \Sigma, \Delta, [q_0]_\sim, \widehat{A} \bigr\rangle$
+\\[0.2cm]
+is the minimal complete \textsc{DFA} that accepts the same language as the \textsc{DFA} $F$.
 
 \exerciseEng
-We consider the  \textsc{FSM} shown in figure \ref{fig:nicht-gleichwertig.dot} and apply the algorithm
-described above to this \textsc{FSM}. 
+We consider the  \textsc{DFA} shown in figure \ref{fig:nicht-gleichwertig.dot} and apply the algorithm
+described above to this \textsc{DFA}. 
 We use a table for this.  The columns and rows of this table are numbered with the different states.  If we
 have recognized in the first step that the states $i$ and $j$ are separable, we insert a $1$ in this
 table in the $i$-th row and the $j$-th column. 
@@ -1491,14 +1542,14 @@ Furthermore, since the states $i$ and $j$ can also be distinguished from the sta
 a $1$ in the $j$-th row and the $i$-th column. 
 \begin{enumerate}
 \item In the first step we recognize that the two accepting states $q_3$ and $q_4$ are separable from all non-accepting states.
-      So the pairs 
+      Therefore the pairs 
       $\pair(q_0,q_3)$,
       $\pair(q_0,q_4)$,
       $\pair(q_1,q_3)$,
       $\pair(q_1,q_4)$,
       $\pair(q_2,q_3)$ and
       $\pair(q_2,q_4)$
-      are separable. So the table now has the following configuration:
+      are separable. Hence the table now has the following configuration:
       \begin{center}        
       \begin{tabular}[t]{|l||l|l|l|l|l|}
       \hline
@@ -1568,26 +1619,26 @@ a $1$ in the $j$-th row and the $i$-th column.
       \item $q_1 \sim q_2$
       \item $q_3 \sim q_4$
       \end{enumerate}
-      Figure \ref{fig:gleichwertig.dot} shows the corresponding reduced finite \textsc{FSM}.
+      Figure \ref{fig:gleichwertig.dot} shows the corresponding reduced finite \textsc{DFA}.
 \end{enumerate}
 
 
 \begin{figure}[!ht]
   \centering
   \epsfig{file=Abbildungen/gleichwertig.eps, scale=0.6}
-   \caption{The reduced \textsc{FSM}.}
+   \caption{The reduced \textsc{DFA}.}
   \label{fig:gleichwertig.dot}
 \end{figure}
 
 
 
 \exerciseEng
-Construct the minimal deterministic  \textsc{FSM} that recognizes the language 
+Construct the minimal  \textsc{DFA} that recognizes the language 
 $L\bigl(a \cdot (b \cdot a)^*\bigr)$.  Perform the following steps:
 \begin{enumerate}[(a)]
-\item Construct a non-deterministic \textsc{FSM} which recognizes this language.
-\item Transform this non-deterministic \textsc{FSM} into a deterministic \textsc{FSM}.
-\item Minimize the number of states of this \textsc{FSM} with the algorithm given above.
+\item Construct an \textsc{NFA} which recognizes this language.
+\item Transform this \textsc{NFA} into a  \textsc{DFA}.
+\item Minimize the number of states of this \textsc{DFA} with the algorithm given above.
 \end{enumerate}
 
 \subsection{Implementation}
@@ -1596,20 +1647,19 @@ The \textsl{Jupyter notebook}
 \hspace*{0.3cm}
 \href{https://github.com/karlstroetmann/Formal-Languages/blob/master/Python/Chapter-04-05/07-Minimize.ipynb}{https://github.com/karlstroetmann/Formal-Languages/../Python/Chapter-04-05/07-Minimize.ipynb}
 \\[0.2cm]
-contains a program that takes a deterministic \textsc{FSM} $F$ and returns an equivalent \textsc{FSM} that has
+contains a program that takes a  \textsc{DFA} $F$ and returns an equivalent \textsc{DFA} that has
 the minimum number of states.
 
 
 \section{Conclusion}
-In this chapter we have shown that the concept of a \blue{deterministic finite state automaton}
-and a \blue{regular expression} are equivalent.
+In this chapter we have shown that the concept of a \blue{finite automaton}
+and the concept of a \blue{regular expression} are equivalent in their ability to describe formal languages.
 \begin{enumerate}[(a)]
-\item Every deterministic finite state automaton can be translated into an equivalent regular expression.
-\item Every regular expression can be translated into an equivalent non-deterministic \textsc{FSM}.
-\item Every non-deterministic \textsc{FSM} can be transformed into an equivalent
-      deterministic \textsc{FSM}.
+\item Every \textsc{DFA} can be translated into an equivalent regular expression.
+\item Every regular expression can be translated into an equivalent \textsc{NFA}.
+\item Every \textsc{NFA} can be transformed into an equivalent \textsc{DFA}.
 \end{enumerate}
-Furthermore, we have shown that every deterministic finite state automaton can be minimized.
+Furthermore, we have shown that every \textsc{DFA} can be minimized.
 
 \paragraph{Historical Remark}
 \href{http://en.wikipedia.org/wiki/Stephen_Cole_Kleene}{Stephen Cole Kleene} (1909 -- 1994) has shown in 1956 that the concepts of 
@@ -1618,14 +1668,14 @@ Furthermore, we have shown that every deterministic finite state automaton can b
 
 \section{Check your Understanding}
 \begin{enumerate}[(a)]
-\item How are deterministic and non-deterministic finite state automatons defined?
-\item Given a non-deterministic \textsc{FSM} $F$, can you convert it into a deterministic \textsc{FSM}
-      $\mathtt{det}(F)$ that accepts the same language as the \textsc{FSM} $F$?
-\item Given a regular expression $r$, can you describe the steps necessary to construct a non-deterministic
-      \textsc{FSM} $F$ that accepts the language specified by $r$?
-\item Given a deterministic \textsc{FSM} $F$ can you describe how to construct a regular expression $r$
+\item How are \textsc{DFA}s and \textsc{NFA}s defined?
+\item Given an \textsc{NFA} $F$, can you convert it into an equivalent \textsc{DFA}
+      $\mathtt{det}(F)$ that accepts the same language as the \textsc{NFA} $F$?
+\item Given a regular expression $r$, can you describe the steps necessary to construct an 
+      \textsc{NFA} $F$ that accepts the language specified by $r$?
+\item Given a \textsc{DFA} $F$ can you describe how to construct a regular expression $r$
       that specifies the language accepted by $F$?
-\item How do we mimimize a finite state automaton?
+\item How do we mimimize a \textsc{DFA}?
 \end{enumerate}
 
 %%% Local Variables: 

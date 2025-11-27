@@ -337,8 +337,7 @@ $\textsl{First}(\textsl{a})$ changes any more.  The next example clarifies this 
 
 \begin{figure}[htbp]
   \begin{center}    
-  \framebox{
-  \framebox{
+  \fcolorbox{blue}{sepia}{
   \begin{minipage}[t]{9cm}
   \begin{eqnarray*}
   \textsl{expr}        & \rightarrow & \;\textsl{product}\;\;\textsl{exprRest}            \\[0.2cm]
@@ -353,7 +352,7 @@ $\textsl{First}(\textsl{a})$ changes any more.  The next example clarifies this 
                        & \mid        & \;\simtextsc{Number} 
   \end{eqnarray*}
   \vspace*{-0.5cm}
-  \end{minipage}}}
+  \end{minipage}}
   \end{center}
   \caption{Grammar for arithmetic expressions.}
   \label{fig:Expr2}
@@ -930,21 +929,20 @@ Figure \ref{fig:BoolExpr.grammar} shows a grammar for boolean expressions.
 \item Provide the sets \(\textsl{First}(v)\) for all syntactic variables \(v\).
 \item Provide the sets \(\textsl{Follow}(v)\) for all syntactic variables \(v\).
 \item Calculate the set of SLR states.
-\item Specify the function \(\textsl{action}\).
-\item Specify the function \(\textsl{goto}\).  
+\item Check whether there are any conflicts.
+\item Specify the function \(\textsl{action}\) for the first four states.
 \end{enumerate}
 Abbreviate the names of the syntactic variables and tokens with \(b\), \(c\), \(s\), and \(I\).
 \eox 
 
 \begin{figure}[htbp]
-  \begin{center}    
-  \framebox{
-  \framebox{
+  \begin{center}
+  \fcolorbox{blue}{sepia}{
   \begin{minipage}[t]{9.5cm}
   \begin{eqnarray*}
   \textsl{bool}        & \rightarrow & \;\textsl{bool} \;\;\mathquoted{\vee}\; \textsl{conjunction}     \\
                        & \mid        & \;\textsl{conjunction}                                           \\[0.2cm]
-  \textsl{disjunction} & \rightarrow & \;\textsl{conjunction} \;\;\mathquoted{\wedge}\; \textsl{simple}   \\
+  \textsl{conjunction} & \rightarrow & \;\textsl{conjunction} \;\;\mathquoted{\wedge}\; \textsl{simple}   \\
                        & \mid        & \;\textsl{simple}                                                \\[0.2cm]
   \textsl{simple}      & \rightarrow & \mathquoted{(}\; \textsl{bool} \;\mathquoted{)}                    \\
                        & \mid        & \mathquoted{\neg}\;\; \simtextsc{Identifier}                          \\
@@ -952,12 +950,12 @@ Abbreviate the names of the syntactic variables and tokens with \(b\), \(c\), \(
   \end{eqnarray*}
   \vspace*{-0.5cm}
 
-  \end{minipage}}}
+  \end{minipage}}
   \end{center}
   \caption{A grammar for Boolean expression in conjunctive normal form.}
   \label{fig:BoolExpr.grammar}
 \end{figure}
-\pagebreak
+
 
 \subsection{Shift/Reduce and Reduce/Reduce Conflicts}
 In this section, we examine shift-reduce and reduce-reduce conflicts in more detail and consider two examples. The first example shows a shift-reduce conflict. 
@@ -968,8 +966,7 @@ The grammar shown in Figure \ref{fig:shift-reduce-conflict.grammar} is ambiguous
 
 \begin{figure}[htbp]
   \begin{center}    
-  \framebox{
-  \framebox{
+  \fcolorbox{blue}{sepia}{
   \begin{minipage}[t]{5.5cm}
     \vspace*{-0.3cm}
 
@@ -980,7 +977,7 @@ The grammar shown in Figure \ref{fig:shift-reduce-conflict.grammar} is ambiguous
   \end{eqnarray*}
   \vspace*{-0.5cm}
 
-  \end{minipage}}}
+  \end{minipage}}
   \vspace*{-0.3cm}
 
   \end{center}
@@ -1076,9 +1073,8 @@ in the next example.
 
 
 \begin{figure}[htbp]
-  \begin{center}    
-  \framebox{
-  \framebox{
+  \begin{center}
+    \fcolorbox{blue}{sepia}{
   \begin{minipage}[t]{5.5cm}
     \vspace*{-0.3cm}
 
@@ -1090,7 +1086,7 @@ in the next example.
   \end{eqnarray*}
   \vspace*{-0.5cm}
 
-  \end{minipage}}}
+  \end{minipage}}
   \vspace*{-0.3cm}
 
   \end{center}
@@ -1158,7 +1154,7 @@ both an element of the set $\textsl{Follow}(a)$ and the set $\textsl{Follow}(b)$
 %  \{ \saquoted{x} \} \cap \{ \saquoted{y} \} = \{\}. 
 % $
 % \\[0.2cm]
-% Dieses Beispiel zeigt, dass SLR-Grammatiken im Allgemeinen nicht ausdruckst‰rker sind als
+% Dieses Beispiel zeigt, dass SLR-Grammatiken im Allgemeinen nicht ausdruckst√§rker sind als
 % LL(1)-Grammatiken.  In der Praxis zeigt sich jedoch, dass viele Grammatiken, die nicht die
 % LL(1)-Eigenschaft haben, SLR-Grammatiken sind.
 
@@ -1170,7 +1166,6 @@ As part of the resources provided with this lecture,  the file
 \\[0.2cm]
 contains a \textsl{Python} program that checks whether a given grammar is an SLR grammar.  This program
 computes the states as well as the action table of a given grammar. \eox
-\pagebreak
 
 \section{Canonical LR Parsers}
 The reduce-reduce conflict that occurs in the grammar shown in Figure \ref{fig:reduce-reduce-conflict.grammar} can be resolved as follows: In the state
@@ -1288,7 +1283,8 @@ the set of Follow Tokens. This makes it possible to describe the states of the p
 marked rules. 
 
 \begin{figure}[!ht]
-\centering
+  \centering
+
 \begin{Verbatim}[ frame         = lines, 
                   framesep      = 0.3cm, 
                   labelposition = bottomline,
@@ -1534,7 +1530,7 @@ His theory is described in the paper
 \eox
 
 
-\section{LALR-Parser}
+\section{LALR-Parser$^*$}
 The number of states in an LR parser is often significantly larger than the number of states in an
 SLR parser for the same grammar. For instance, an SLR parser for the 
 \href{https://github.com/karlstroetmann/Formal-Languages/blob/master/SetlX/Examples/c-grammar.g}{\texttt{C} grammar} 
@@ -1552,25 +1548,20 @@ Figure \ref{fig:dragon-book.grammar}, which I have taken from the \blue{Dragon B
 \cite{aho:2006}. (The ``Dragon Book'' is the standard work in the field of compiler construction.)
 
 \begin{figure}[htbp]
-  \begin{center}    
-  \framebox{
-  \framebox{
-  \begin{minipage}[t]{5.5cm}
-    \vspace*{-0.3cm}
-
-  \begin{eqnarray*}
-  \widehat{s} & \rightarrow & s      \\[0.1cm]
-  s  & \rightarrow & c \; c          \\[0.1cm]
-  c  & \rightarrow & \saquoted{x}\; c \\
-     & \mid        & \saquoted{y}\;
-  \end{eqnarray*}
-  \vspace*{-0.5cm}
-
-  \end{minipage}}}
-  \vspace*{-0.3cm}
-
-  \end{center}
-  \caption{Eine Grammatik aus dem Drachenbuch.}
+  \centering 
+    \fcolorbox{blue}{sepia}{
+      \begin{minipage}[t]{5.5cm}
+        \vspace*{-0.3cm}
+        \begin{eqnarray*}
+          \widehat{s} & \rightarrow & s      \\[0.1cm]
+          s  & \rightarrow & c \; c          \\[0.1cm]
+          c  & \rightarrow & \saquoted{x}\; c \\
+             & \mid        & \saquoted{y}\;
+        \end{eqnarray*}
+        \vspace*{-0.5cm}
+      \end{minipage}
+    }
+  \caption{A grammar from the Dragon Book.}
   \label{fig:dragon-book.grammar}
 \end{figure}
 
@@ -1705,7 +1696,7 @@ core. Therefore, the set
 \hspace*{1.3cm}
 $\Bigl\{ q \in \frak{Q} \mid \textsl{core}(q) =
   \textsl{core}\bigl(\textsl{closure}\bigl( \bigl\{  
-  a \rightarrow \beta\, x \bullet \gamma:L \mid (a \rightarrow \beta \bullet x\, \gamma:L) \in \mathcal{M} 
+  a \rightarrow \beta\, X \bullet \gamma:L \mid (a \rightarrow \beta \bullet X\, \gamma:L) \in \mathcal{M} 
   \bigr\} \bigr)\bigr)
   \Bigr\}
 $
@@ -1713,7 +1704,7 @@ $
 contains exactly one element and this element is the value of $\textsl{goto}(\mathcal{M}, X)$. Thus,
 we can set
 \\[0.2cm]
-\hspace*{1.3cm}
+\hspace*{-0.1cm}
 $\ds\textsl{goto}(\mathcal{M}, X) := \textsl{arb}\Bigl(\Bigl\{ q \in \frak{Q} \mid \textsl{core}(q) =
   \textsl{core}\Bigl(\textsl{closure}\Bigl( \bigl\{  
   a \rightarrow \beta\, X \bullet \gamma:L \mid (a \rightarrow \beta \bullet X\, \gamma:L) \in \mathcal{M} 
@@ -1797,12 +1788,15 @@ LALR parsers, we have only combined states with the same core, and the
 definition of the functions $\textsl{goto}()$ and $\textsl{action}()$ remained unchanged.
  
 \subsection{\blue{LALR Language} $\subsetneq$ \blue{Canonical LR Language}}
-We defined LALR parsers by combining different states of a canonical LR parser. Therefore, it is clear that canonical LR parsers are at least as powerful as LALR parsers. To demonstrate that canonical LR parsers are indeed more powerful than LALR parsers, we need a grammar for which a canonical LR parser can be generated, but not an LALR parser. Figure \ref{fig:lr-but-notlalr.g} shows such a grammar, which I have taken from the Dragon Book.
+We have defined LALR parsers by combining different states of a canonical LR parser. Therefore, it is clear
+that canonical LR parsers are at least as powerful as LALR parsers. To demonstrate that canonical LR parsers
+are indeed more powerful than LALR parsers, we need a grammar for which a canonical LR parser can be generated,
+but not an LALR parser. Figure \ref{fig:lr-but-notlalr.g} shows such a grammar, which I have taken from the
+Dragon Book. 
 
 \begin{figure}[htbp]
-  \begin{center}    
-  \framebox{
-  \framebox{
+  \begin{center}
+        \fcolorbox{blue}{sepia}{
   \begin{minipage}[t]{5.5cm}
     \vspace*{-0.3cm}
 
@@ -1816,7 +1810,7 @@ We defined LALR parsers by combining different states of a canonical LR parser. 
   \end{eqnarray*}
   \vspace*{-0.5cm}
 
-  \end{minipage}}}
+  \end{minipage}}
   \vspace*{-0.3cm}
 
   \end{center}
@@ -1912,25 +1906,22 @@ Let $G = \langle V, T, R, s \rangle$ be an LR grammar and $\mathcal{N}$ be the s
 
 \paragraph{Historical Notes}
 The theory of LALR parsing is due to Franklin L.~DeRemer \cite{deRemer:71}.  At the time of its
-invention,  the space savings of LALR parsing in comparison to LR parsing were crucial.  
+invention,  the space savings of LALR parsing in comparison to LR parsing were crucial.
+Franklin L.~DeRemer also 
 
 \subsection{Evaluation of the Different Methods}
 In practice, SLR parsers are not sufficient, as there are a number of practically relevant language constructs for which no SLR parser can be generated. Canonical LR parsers are much more powerful but often require significantly more states. LALR parsers represent a compromise here: on the one hand, LALR languages are almost as expressive as canonical LR languages, but on the other hand, the memory requirements of LALR parsers are in the same order of magnitude as those of SLR parsers. For example, the SLR parse table for the \texttt{C} language has a total of 349 states, the corresponding LR parse table has 1572 states, while the LALR parser manages with 350 states, thus only one state more than the SLR parser.  
 In the main memories typically available today, however, canonical LR parsers can usually be accommodated without difficulty, so there is actually no compelling reason to use an LALR parser instead of an LR parser.  
 
-On the other hand, no one will want to program an LALR parser or a canonical LR parser by hand. Instead, you will later use a parser generator like \textsl{Bison} or \textsl{JavaCup}, which generates a parser for you. Bison is a parser generator for \texttt{C}, \texttt{C++} and also offers, albeit still experimental, support for \textsl{Java}, while \textsl{JavaCup} is limited to the language \textsl{Java}. If you use \textsl{JavaCup}, you have no choice, as this tool always generates an LALR parser. With \href{http://www.gnu.org/software/bison/manual/bison.html}{\textsl{Bison}}, from version 3.0, it is also possible to generate an LR parser.
+On the other hand, no one will want to program an LALR parser or a canonical LR parser by hand. Instead, you
+will later use a parser generator like \simtextsc{Ply} for \textsl{Python}, \textsl{Bison} for \texttt{C}, or
+\textsl{JavaCup} for \textsl{Java}.  While \simtextsc{Ply} and \textsl{JavaCup} can only generate an LALR parser,
+\href{http://www.gnu.org/software/bison/manual/bison.html}{\textsl{Bison}} can also generate an LR parser. 
 
 \section{Check your Understanding}
 \begin{enumerate}[(a)]
 \item What is the definition of a \blue{shift-reduce parser} and how is the set \textsl{Action} defined?
 \item How does a shift-reduce parser work?
-
-      If you are unsure about this question, you should run the notebook
-      \\[0.2cm]
-      \hspace*{-0.6cm}
-      \href{https://github.com/karlstroetmann/Formal-Languages/blob/master/Python/Chapter-09/Shift-Reduce-Parser.ipynb}{https://github.com/karlstroetmann/Formal-Languages/blob/master/Python/Chapter-09/Shift-Reduce-Parser.ipynb}
-      \\[0.2cm]
-      and inspect its output.
 \item How is the concept of a \blue{marked rule} defined?  How is a marked rule interpreted?
 \item Can you compute the closure of a set of marked rules?
 \item Are you able to define the functions \texttt{First} and \texttt{Follow} for an \simtextsc{Slr}-parser?
@@ -1938,8 +1929,11 @@ On the other hand, no one will want to program an LALR parser or a canonical LR 
 \item Given the set of all states of an \simtextsc{Slr}-parser, can you compute both the action table and the goto
       table? 
 \item How is the concept of an \blue{extended marked rule} defined?
-\item Can you compute the closure of a set of extended marked rules?
+\item Are you able to compute the closure of a set of extended marked rules?
+\item Define the notion of shift/reduce and reduce/reduce conflicts for both \simtextsc{Slr}-parsers and for
+      \simtextsc{Lr}-parsers. 
 \item Why are \simtextsc{Lr}-parser-generators more powerful than \simtextsc{Slr}-parser-generators?
+\item How is the set of states reduced when we transform an \simtextsc{Lr}-parser into an \simtextsc{Lalr}-parser?
 \end{enumerate}
 
 

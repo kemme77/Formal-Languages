@@ -1,4 +1,13 @@
 \chapter{Assembler}
+
+\begin{figure}[h] 
+\centering
+  \includegraphics[width=10cm]{Abbildungen/jasmin.jpg}
+\caption{Jasmin.}
+\label{fig:jasmin.png}
+\end{figure}
+
+
 A compiler translates programs written in a high level language like \texttt{C} or
 \textsl{Java} into some low level representation.  This low level representation can be
 either machine code or some form of assembler code.  For the programming language
@@ -36,13 +45,13 @@ Here is a list of some of the better knwon programming languages that use the \s
       \href{https://en.wikipedia.org/wiki/Android_(operating_system)}{Android} development as a replacement for 
       \textsl{Java}.
 
-      As of the $28^\mathrm{th}$ of November 2024, \textsl{Kotlin} occupies the $20^{\mathrm{th}}$ place in the
+      As of November 2025, \textsl{Kotlin} occupies the $20^{\mathrm{th}}$ place in the
       \href{https://www.tiobe.com/tiobe-index/}{Tiobe index}. 
 \item \href{https://www.scala-lang.org}{Scala} 
        blends functional and object-oriented programming paradigms. Scala compiles to \simtextsc{Jvm} bytecode
        and is often used for concurrent and distributed applications.
 
-       Currently, \textsl{Scala} occupies the $30^{th}$ place in the
+       Currently, \textsl{Scala} occupies the $35^{th}$ place in the
        \href{https://www.tiobe.com/tiobe-index/}{Tiobe index}.       
 \item \href{https://groovy-lang.org}{Groovy} is a dynamic scripting language that is easy to learn for
       \textsl{Java} programmers because its syntax is close to \textsl{Java}. It is often used in scripting,
@@ -67,33 +76,35 @@ hardware platforms that support \textsl{Java}.
 
 \begin{figure}[!ht]
 \centering
+\begin{tcolorbox}[colback=sepia, boxrule=1pt, sharp corners, boxsep=0pt]
 \begin{Verbatim}[ frame         = lines, 
                   framesep      = 0.3cm, 
                   firstnumber   = 1,
                   labelposition = bottomline,
                   numbers       = left,
-                  numbersep     = -0.2cm,
-                  xleftmargin   = 0.8cm,
-                  xrightmargin  = 0.8cm,
+                  numbersep     = 0.5cm,
+                  xleftmargin   = 0.0cm,
+                  xrightmargin  = 0.0cm,
                 ]
-    .class public Hello
-    .super java/lang/Object
-    
-    .method public <init>()V
-        aload 0
-        invokenonvirtual java/lang/Object/<init>()V
-        return
-    .end method
-    
-    .method public static main([Ljava/lang/String;)V
-        .limit locals 1
-        .limit stack  2
-        getstatic     java/lang/System/out Ljava/io/PrintStream;
-        ldc           "Hello World!"
-        invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V 
-        return
-    .end method
+.class public Hello
+.super java/lang/Object
+
+.method public <init>()V
+    aload 0
+    invokenonvirtual java/lang/Object/<init>()V
+    return
+.end method
+
+.method public static main([Ljava/lang/String;)V
+    .limit locals 1
+    .limit stack  2
+    getstatic     java/lang/System/out Ljava/io/PrintStream;
+    ldc           "Hello World!"
+    invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V 
+    return
+.end method
 \end{Verbatim}
+\end{tcolorbox}
 \vspace*{-0.3cm}
 \caption{An assembler program to print ``\texttt{Hello World!}''.}
 \label{fig:Hello.jas}
@@ -127,7 +138,24 @@ We discuss this program line by line.
       has to be replaced by the character ``\texttt{/}''.  This is true even if a \textsl{Windows}
       operating system is used.
 \item The lines 4 -- 8 initialize the program.  This code is always the same and corresponds to a
-      constructor for the class \texttt{Hello}.  As this code is copied verbatim to the beginning 
+  constructor for the class \texttt{Hello}.  It is equivalent to the following \textsl{Java} code:
+
+\begin{minted}[ frame         = lines, 
+                framesep      = 0.3cm, 
+                firstnumber   = 1,
+                bgcolor       = sepia,
+                labelposition = bottomline,
+                numbers       = left,
+                numbersep     = -0.2cm,
+                xleftmargin   = 0.8cm,
+                xrightmargin  = 0.8cm,
+              ]{java}
+    public Hello() {
+        super(); // Calls the constructor of java.lang.Object
+    }
+\end{minted}
+
+      As this code is copied verbatim to the beginning 
       of every class file, we will not discuss it further. 
 \item The lines 10 -- 17 defines the method \texttt{main} that does the actual work.
   \begin{enumerate}[(a)]
@@ -157,29 +185,29 @@ We discuss this program line by line.
         The information on the number of local variables is needed by the \textsl{Java} virtual
         machine in order to allocate memory for these variables on the stack.
 
+        
 \begin{figure}[!ht]
 \centering
-\begin{Verbatim}[ frame         = lines, 
-                  framesep      = 0.3cm, 
-                  firstnumber   = 1,
-                  labelposition = bottomline,
-                  numbers       = left,
-                  numbersep     = -0.2cm,
-                  xleftmargin   = 2.3cm,
-                  xrightmargin  = 2.3cm,
-                ]
-    public class Hello {
-        public static void main(String[] args) {
-    	System.out.println("Hello World!");
-        }
+\begin{minted}[ frame         = lines, 
+                framesep      = 0.3cm, 
+                firstnumber   = 1,
+                bgcolor       = sepia,
+                labelposition = bottomline,
+                numbers       = left,
+                numbersep     = -0.2cm,
+                xleftmargin   = 0.8cm,
+                xrightmargin  = 0.8cm,
+              ]{java}
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
     }
-\end{Verbatim}
+\end{minted}
 \vspace*{-0.3cm}
 \caption{Printing \texttt{Hello world} in \textsl{Java}.} 
 \label{fig:Hello.java}
 \end{figure}
 
-  \item For the purpose of the following discussion, we basically assume that there exist two types of
+  \item For the purpose of the following discussion, we assume that there exist two types of
         processors: Those that store the objects they work upon in registers and those that store
         these objects on a stack residing in main memory.  The Java virtual machine is of the second
         type.  Hence, \textsl{Jasmin} assembler programs do not refer to registers but rather refer to
@@ -204,11 +232,14 @@ We discuss this program line by line.
         Then, the command \texttt{ldc} in line 14 pushes a reference to the string ``\texttt{Hello World}'' onto the stack.
         The other instructions do not push anything onto the stack.
   \item Line 15 calls the method \texttt{println}, which is a method of the class
-        ``\texttt{java.io.PrintStream}''.  It also specifies that \texttt{println} takes one argument of
-        type \texttt{java.lang.String} and returns nothing.
+        ``\texttt{java.io.PrintStream}''.
+        Therefore, we first have to put an object of this class onto the stack.  This object is the object
+        \texttt{java.lang.System.out} that was  pushed on the stack using the method \texttt{getstatic} in
+        line 13.
 
-        In reality, \texttt{println} needs a second argument.  This argument is the object
-        \texttt{java.lang.System.out} that we had previously pushed on the stack using the method \texttt{getstatic}.
+        Line 15 also specifies that \texttt{println} takes one argument of
+        type \texttt{java.lang.String} and that it returns \texttt{void}, i.e. nothing.
+
   \item Line 16 returns from the method \texttt{main}.
   \item In line 17 the directive ``\texttt{\green{.end}}''  marks the end of the code corresponding to the method 
         \texttt{main}.
@@ -225,9 +256,9 @@ Of course, for this to work the directory \texttt{/usr/local/lib/} has to contai
 called \texttt{jasmin.bat} somewhere in our \texttt{PATH}.  This file would contain the following
 line:
 \begin{verbatim}
-    java -jar %USERPROFILE%/Dropbox/Software/jasmin-2.4/jasmin.jar %*
+    java -jar %USERPROFILE%\Software\jasmin-2.4\jasmin.jar %*
 \end{verbatim}
-Of course, for this to work the directory \texttt{\%USERPROFILE\%/Dropbox/Software/jasmin-2.4}
+Of course, for this to work the directory \texttt{\%USERPROFILE\%\symbol{92}Software\symbol{92}jasmin-2.4}
 has to contain the file ``\texttt{jasmin.jar}''.
 
 In order to execute the assembler program discussed above, we first have to translate the assembler
@@ -280,7 +311,7 @@ instructions we have to discuss how the main memory is organized in the \simtext
       However, in the context of the \simtextsc{Jvm} the procedures are called \emph{methods} instead
       of procedures.
 
-      The register \texttt{SP} points to the top of the stack.
+      The register \texttt{SP} (\blue{stack pointer}) points to the top of the stack.
       If a method is called, the arguments of the method are placed on the stack.  
       The register \texttt{LV} (\blue{local variables}) points to the first argument of the current  
       method.    On top of the arguments, the local variables of the method are put on the stack.
@@ -292,8 +323,19 @@ instructions we have to discuss how the main memory is organized in the \simtext
 \item The \blue{constant pool} contains the definitions of constants and also the addresses of
       methods in program memory.
 \end{enumerate}
+Figure \ref{fig:jvm.png} shows the memory structure of the \simtextsc{Jvm}.
 In the following, we will be mostly concerned with the stack.
 We proceed to discuss some of the assembler instructions.
+
+
+\begin{figure}[!ht]
+\centering
+\epsfig{file=Abbildungen/jvm.png, scale=0.17}
+\vspace*{-0.3cm}
+\caption{The memory structure of the \simtextsc{Jvm}.}
+\label{fig:jvm.png}
+\end{figure}
+
 
 \subsubsection{Arithmetical and Logical Instructions}
 
@@ -309,7 +351,7 @@ We proceed to discuss some of the assembler instructions.
 \setlength{\unitlength}{0.5cm}
 \begin{figure}[!ht]
   \centering
-\framebox{
+\fcolorbox{black}{sepia}{
 \begin{picture}(20,14)
 \put(4.5,1){before \texttt{iadd}}
 \put(4.91,3){$\vdots$}
@@ -354,7 +396,7 @@ We proceed to discuss some of the assembler instructions.
 \setlength{\unitlength}{0.5cm}
 \begin{figure}[!ht]
   \centering
-\framebox{
+\fcolorbox{black}{sepia}{
 \begin{picture}(20,14)
 \put(4.5,1){before \texttt{isub}}
 \put(4.91,3){$\vdots$}
@@ -410,7 +452,7 @@ We proceed to discuss some of the assembler instructions.
       integer values found on top of the stack.
 
       Again, it is important to note that the \textsl{Java} implementation of $a \;\texttt{\%}\; b$
-      differs from the implementation in \textsl{Java}.  For example, in \textsl{Java} we have
+      differs from the implementation in \textsl{Python}.  For example, in \textsl{Java} we have
       $-5 \,\mathtt{\%}\, 3 = -2$,
       while we have $-5 \,\mathtt{\%}\, 3 = 1$
       in \textsl{Python}.
@@ -434,7 +476,7 @@ We proceed to discuss some of the assembler instructions.
 \setlength{\unitlength}{0.5cm}
 \begin{figure}[!ht]
   \centering
-\framebox{
+\fcolorbox{blue}{sepia}{
 \begin{picture}(20,14)
 \put(4.5,1){before \texttt{ishl}}
 \put(4.91,3){$\vdots$}
@@ -484,7 +526,7 @@ We proceed to discuss some of the assembler instructions.
 \setlength{\unitlength}{0.5cm}
 \begin{figure}[!ht]
   \centering
-\framebox{
+\fcolorbox{blue}{sepia}{
 \begin{picture}(20,14)
 \put(4.5,1){before \texttt{dup}}
 \put(4.91,3){$\vdots$}
@@ -524,7 +566,7 @@ We proceed to discuss some of the assembler instructions.
 \setlength{\unitlength}{0.5cm}
 \begin{figure}[!ht]
   \centering
-\framebox{
+\fcolorbox{blue}{sepia}{
 \begin{picture}(20,14)
 \put(4.5,1){before \texttt{pop}}
 \put(4.91,3){$\vdots$}
@@ -569,7 +611,7 @@ We proceed to discuss some of the assembler instructions.
 \setlength{\unitlength}{0.5cm}
 \begin{figure}[!ht]
   \centering
-\framebox{
+\fcolorbox{blue}{sepia}{
 \begin{picture}(20,14)
 \put(4.5,1){before \texttt{bipush} $b$}
 \put(4.91,3){$\vdots$}
@@ -623,7 +665,7 @@ We proceed to discuss some of the assembler instructions.
 \setlength{\unitlength}{0.5cm}
 \begin{figure}[!ht]
   \centering
-\framebox{
+\fcolorbox{blue}{sepia}{
 \begin{picture}(20,18)
 \put(4.5,1){before \texttt{iload} $v$}
 \put(4.91,3){$\vdots$}
@@ -686,7 +728,7 @@ We proceed to discuss some of the assembler instructions.
 \setlength{\unitlength}{0.5cm}
 \begin{figure}[!ht]
   \centering
-\framebox{
+\fcolorbox{blue}{sepia}{
 \begin{picture}(20,18)
 \put(4.5,1){before \texttt{istore} $v$}
 \put(4.91,3){$\vdots$}
@@ -856,16 +898,17 @@ We discuss the implementation of this program next.
 
 
 \begin{figure}[!ht]
-\centering
-\begin{Verbatim}[ frame         = lines, 
-                  framesep      = 0.3cm, 
-                  firstnumber   = 1,
-                  labelposition = bottomline,
-                  numbers       = left,
-                  numbersep     = -0.2cm,
-                  xleftmargin   = 0.8cm,
-                  xrightmargin  = 0.8cm,
-                ]
+  \centering
+  \begin{minted}[ frame         = lines, 
+                framesep      = 0.3cm, 
+                firstnumber   = 1,
+                bgcolor       = sepia,
+                labelposition = bottomline,
+                numbers       = left,
+                numbersep     = -0.2cm,
+                xleftmargin   = 0.8cm,
+                xrightmargin  = 0.8cm,
+              ]{c}
     #import "stdio.h"
     
     int sum(int n) {
@@ -881,30 +924,29 @@ We discuss the implementation of this program next.
         printf("%d\n", sum(6*6));
         return 0;
     }
-\end{Verbatim}
+\end{minted}
 \vspace*{-0.3cm}
-\caption{A \texttt{C} function to compute  $\sum\limits_{i=1}^{36} i$.}
+\caption{A \texttt{C} function to compute the sum $\sum\limits_{i=1}^{36} i$.}
 \label{fig:sum-jasmin.c}
 \end{figure}
 
 \begin{figure}[!ht]
-\centering
+  \centering
+\begin{tcolorbox}[colback=sepia, boxrule=1pt, sharp corners, boxsep=0pt]
 \begin{Verbatim}[ frame         = lines, 
                   framesep      = 0.3cm, 
                   firstnumber   = 1,
                   labelposition = bottomline,
                   numbers       = left,
                   numbersep     = -0.2cm,
-                  xleftmargin   = 0.8cm,
-                  xrightmargin  = 0.8cm,
+                  xleftmargin   = 0.0cm,
+                  xrightmargin  = 0.0cm,
                 ]
     .class public Sum
     .super java/lang/Object
     
     .method public <init>()V
-        aload 0
-        invokenonvirtual java/lang/Object/<init>()V
-        return
+        ...
     .end method
     
     .method public static main([Ljava/lang/String;)V
@@ -941,6 +983,7 @@ We discuss the implementation of this program next.
         ireturn                     ; return s;
     .end method
 \end{Verbatim}
+\end{tcolorbox}
 \vspace*{-0.3cm}
 \caption{An assembler program to compute the sum $\sum\limits_{i=1}^{36} i$.}
 \label{fig:Sum.jas}
@@ -950,46 +993,46 @@ We discuss the implementation of this program next.
 \item Line 1 specifies the name of the generated class which is to be \texttt{Sum}.
 \item Line 2 specifies that the class \texttt{Sum} is a subclass of the class
       \texttt{java.lang.Object}. 
-\item Lines 4 -- 8 initialize the class.  The code used here is the same as in the example printing 
+\item Lines 4 -- 6 initialize the class.  The code used here is the same as in the example printing 
       ``\texttt{Hello World!}''.
-\item Line 10 declares the method \texttt{main}.  This method takes an argument which is an array of strings.
+\item Line 8 declares the method \texttt{main}.  This method takes an argument which is an array of strings.
       It does not return a value.
-\item Line 11 specifies that there is just one local variable.
-\item Line 12 specifies that the stack will contain at most 3 temporary values.
-\item Line 13 pushes the object \texttt{java.lang.out} onto the stack.
+\item Line 9 specifies that there is just one local variable.
+\item Line 10 specifies that the stack will contain at most 3 temporary values.
+\item Line 11 pushes the object \texttt{java.lang.out} onto the stack.
       We need this object later in order to invoke \texttt{println}.
-\item Line 14 pushes the number 6 onto the stack.
-\item Line 15 duplicates the value 6.  Therefore, after line 15 is executed, the stack contains three
+\item Line 12 pushes the number 6 onto the stack.
+\item Line 13 duplicates the value 6.  Therefore, after line 15 is executed, the stack contains three
       elements: The object \texttt{java.lang.out},  the number 6, and again the number 6.
-\item Line 16 multiplies the two values on top of the stack and replaces them with their product,
+\item Line 14 multiplies the two values on top of the stack and replaces them with their product,
       which happens to be 36.
-\item Line 17 calls the method \texttt{sum} defined below.  After this call has finished, the number 
+\item Line 15 calls the method \texttt{sum} defined below.  After this call has finished, the number 
       36 on top of the stack is replaced with the value $\mathtt{sum}(36)$.
-\item Line 18 prints the value that is on top of the stack.
+\item Line 16 prints the value that is on top of the stack.
       This is possible, because the object \texttt{java.lang.out} is directly below the value
       $\texttt{sum}(36)$.
-\item Line 22 declares the method sum.  This method takes one integer argument and returns an
+\item Line 20 declares the method sum.  This method takes one integer argument and returns an
       integer as result. 
-\item Line 23 specifies that the method \texttt{sum} has two local variables: The first local
+\item Line 21 specifies that the method \texttt{sum} has two local variables: The first local
       variable is the parameter $n$ and the second local variable corresponds to the variable $s$ in the
       \texttt{C} program.
-\item The effect of lines 25 and 26 is to initialize this variable $s$ with the value $0$.
-\item Line 28 pushes the local variable $n$ on the stack so that line 29 is able to test whether $n$
-      is already $0$.  If $n = 0$, the program branches to the label \texttt{finish} in line 39,
-      pushes the result $s$ onto the stack (line 40) and returns.  If $n$ is not yet $0$, the
-      execution proceeds to line 30.
-\item Line 30 and line 31 push the sum $s$ and the variable $n$ onto the stack.  These
-      values are then added in line 32 and the result is written to the local variable $s$ in line 33.
+\item The effect of lines 23 and 24 is to initialize this variable $s$ with the value $0$.
+\item Line 26 pushes the local variable $n$ on the stack so that line 27 is able to test whether $n$
+      is already $0$.  If $n = 0$, the program branches to the label \texttt{finish} in line 37,
+      pushes the result $s$ onto the stack (line 38) and returns.  If $n$ is not yet $0$, the
+      execution proceeds to line 28.
+\item Line 28 and line 29 push the sum $s$ and the variable $n$ onto the stack.  These
+      values are then added in line 30 and the result is written to the local variable $s$ in line 31.
       The combined effect of these instructions is therefore to perform the assignment
       \\[0.2cm]
       \hspace*{1.3cm}
       \texttt{s = s + n;}
-\item The instructions in line 34 up to line 37 implement the assignment 
+\item The instructions in line 32 up to line 35 implement the assignment 
       \\[0.2cm]
       \hspace*{1.3cm}
       \texttt{n = n - 1;}
-\item In line 38 we jump back to the beginning of the loop and test whether $n$ is zero.  
-\item The declaration in line 42 terminates the definition of the method \texttt{sum}.
+\item In line 36 we jump back to the beginning of the loop and test whether $n$ is zero.  
+\item The declaration in line 40 terminates the definition of the method \texttt{sum}.
 \end{enumerate}
 
 \exerciseEng
@@ -1000,6 +1043,23 @@ We discuss the implementation of this program next.
 \item Implement the function \texttt{factorial} in a recursive manner.
 \end{enumerate}
 
+\exerciseEng
+Create a Jasmin assembler program that calculates the $n$-th number in the Fibonacci sequence.
+This exercise tests your ability to manage the stack during recursive calls or iterative state tracking.
+
+The Fibonacci sequence is defined recursively as follows:
+\begin{equation*}
+    F(n) = 
+    \begin{cases} 
+        0 & \text{if } n = 0 \\
+        1 & \text{if } n = 1 \\
+        F(n-1) + F(n-2) & \text{if } n > 1
+    \end{cases}
+\end{equation*}
+
+
+\subsection*{Hint}
+If you choose a recursive approach, remember that calculating $F(n-1) + F(n-2)$ requires storing the result of the first call on the stack while the second call is being processed. Pay close attention to your \texttt{.limit stack} directive!
 
 \section{Disassembler$^*$}
 Sometimes it is useful to transform a file consisting of \textsl{Java} byte code back into something
@@ -1026,15 +1086,16 @@ This will produce a class file with the name ``\texttt{Sum.class}'' containing t
 
 \begin{figure}[!ht]
 \centering
-\begin{Verbatim}[ frame         = lines, 
-                  framesep      = 0.3cm, 
-                  firstnumber   = 1,
-                  labelposition = bottomline,
-                  numbers       = left,
-                  numbersep     = -0.2cm,
-                  xleftmargin   = 0.8cm,
-                  xrightmargin  = 0.8cm,
-                ]
+  \begin{minted}[ frame         = lines, 
+                framesep      = 0.3cm, 
+                firstnumber   = 1,
+                bgcolor       = sepia,
+                labelposition = bottomline,
+                numbers       = left,
+                numbersep     = -0.2cm,
+                xleftmargin   = 0.8cm,
+                xrightmargin  = 0.8cm,
+              ]{java}
     public class Sum {
         public static void main(String[] args) {
             System.out.println(sum(6 * 6));
@@ -1048,7 +1109,7 @@ This will produce a class file with the name ``\texttt{Sum.class}'' containing t
     	return s;
         }
     }
-\end{Verbatim}
+\end{minted}
 \vspace*{-0.3cm}
 \caption{A \textsl{Java} program computing $\ds\sum\limits_{i=0}^{6^2} i$.}
 \label{fig:Sum.java}
@@ -1066,50 +1127,57 @@ see that the output produced by \texttt{javap} is quite similar to the input acc
 
 \begin{figure}[!ht]
 \centering
-\begin{Verbatim}[ frame         = lines, 
-                  framesep      = 0.3cm, 
-                  firstnumber   = 1,
-                  labelposition = bottomline,
-                  numbers       = left,
-                  numbersep     = -0.2cm,
-                  xleftmargin   = 0.0cm,
-                  xrightmargin  = 0.0cm,
-                ]
-    Compiled from "Sum.java"
-    public class Sum {
-      public Sum();
-        Code:
-           0: aload_0       
-           1: invokespecial #1           // Method java/lang/Object."<init>":()V
-           4: return        
-    
-      public static void main(java.lang.String[]);
-        Code:
-           0: getstatic     #2           // Field java/lang/System.out:Ljava/io/PrintStream;
-           3: bipush        36
-           5: invokestatic  #3           // Method sum:(I)I
-           8: invokevirtual #4           // Method java/io/PrintStream.println:(I)V
-          11: return        
-    
-      static int sum(int);
-        Code:
-           0: iconst_0      
-           1: istore_1      
-           2: iconst_0      
-           3: istore_2      
-           4: iload_2       
-           5: iload_0       
-           6: if_icmpgt     19
-           9: iload_1       
-          10: iload_2       
-          11: iadd          
-          12: istore_1      
-          13: iinc          2, 1
-          16: goto          4
-          19: iload_1       
-          20: ireturn       
-    }
+% The tcolorbox acts as the background container
+% colback=LightSepia: sets the background color
+% frame hidden: removes the box border (so we only see Verbatim lines)
+% boxrule=0pt: ensures no border width
+% sharp corners: ensures the background is a rectangle, not rounded
+\begin{tcolorbox}[colback=sepia, boxrule=1pt, sharp corners, boxsep=0pt]
+    \begin{Verbatim}[ frame         = lines, 
+                      framesep      = 0.3cm, 
+                      firstnumber   = 1,
+                      labelposition = bottomline,
+                      numbers       = none,
+                      xleftmargin   = 0.0cm,
+                      xrightmargin  = 0.0cm,
+                    ]
+Compiled from "Sum.java"
+public class Sum {
+  public Sum();
+    Code:
+      0: aload_0        
+      1: invokespecial #1 // Method java/lang/Object."<init>":()V
+      4: return        
+ 
+  public static void main(java.lang.String[]);
+    Code:
+      0: getstatic     #2 // Field java/lang/System.out:
+                          //       Ljava/io/PrintStream;
+      3: bipush        36
+      5: invokestatic  #3 // Method sum:(I)I
+      8: invokevirtual #4 // Method java/io/PrintStream.println:(I)V
+     11: return        
+ 
+  static int sum(int);
+    Code:
+      0: iconst_0      
+      1: istore_1      
+      2: iconst_0      
+      3: istore_2      
+      4: iload_2        
+      5: iload_0        
+      6: if_icmpgt     19
+      9: iload_1        
+     10: iload_2        
+     11: iadd          
+     12: istore_1      
+     13: iinc          2, 1
+     16: goto          4
+     19: iload_1        
+     20: ireturn        
+}
 \end{Verbatim}
+\end{tcolorbox}
 \vspace*{-0.3cm}
 \caption{The output of ``\texttt{javap -c Sum.class}''.}
 \label{fig:Sum.class}
